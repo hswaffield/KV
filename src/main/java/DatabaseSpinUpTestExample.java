@@ -9,6 +9,9 @@ public class DatabaseSpinUpTestExample {
 
   public static void main(String[] args) throws Exception {
 
+    // edit this path, as needed, this is just one example
+    final String pathToDb = "/Users/hswaff/code/KV/db";
+
     // a static method that loads the RocksDB C++ library.
     RocksDB.loadLibrary();
 
@@ -17,7 +20,7 @@ public class DatabaseSpinUpTestExample {
     try (final Options options = new Options().setCreateIfMissing(true)) {
 
       // a factory method that returns a RocksDB instance
-      try (final RocksDB db = RocksDB.open(options, "/Users/hswaff/code/KV/db")) {
+      try (final RocksDB db = RocksDB.open(options, pathToDb)) {
 
         byte[] hi_key = "hi_key".getBytes();
         byte[] hi_value = "hi_value".getBytes();
@@ -35,9 +38,6 @@ public class DatabaseSpinUpTestExample {
         System.out.println(Arrays.toString(db.get(hi_key_2)));
         System.out.println(new String(db.get(hi_key_2), StandardCharsets.UTF_8));
 
-        System.out.println("sleeping now");
-        Thread.sleep(45 * 1000);
-        System.out.println("done sleeping now");
       }
     } catch (RocksDBException e) {
       // do some error handling
