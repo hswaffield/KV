@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
@@ -7,7 +9,11 @@ import java.util.Arrays;
 
 public class DatabaseSpinUpTestExample {
 
+  static Logger logger = Logger.getLogger(DatabaseSpinUpTestExample.class);
+
   public static void main(String[] args) throws Exception {
+    //TODO: seperate logging configuration into a seperate place, probably:
+    PropertyConfigurator.configure("log4j.properties");
 
     // edit this path, as needed, this is just one example
     final String pathToDb = "/Users/hswaff/code/KV/db";
@@ -37,10 +43,12 @@ public class DatabaseSpinUpTestExample {
 
         System.out.println(Arrays.toString(db.get(hi_key_2)));
         System.out.println(new String(db.get(hi_key_2), StandardCharsets.UTF_8));
-
+        logger.info(
+            "check it out: db.get(hi_key)" + new String(db.get(hi_key), StandardCharsets.UTF_8));
       }
     } catch (RocksDBException e) {
       // do some error handling
+      logger.error("there was an error");
       throw e;
     }
   }
