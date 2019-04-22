@@ -1,4 +1,4 @@
-package com.kv.utils;
+package com.kv.db;
 
 public class KeyValueQuery {
 
@@ -13,7 +13,7 @@ public class KeyValueQuery {
 //TODO: should probably seperate out these types, but for now the intuition is that if it's
 // not type put, it will have the value ignored...
 
-  public static enum QueryType {
+  public enum QueryType {
     PUT,
     GET,
     DELETE,

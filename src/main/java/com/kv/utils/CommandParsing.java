@@ -1,5 +1,6 @@
 package com.kv.utils;
 
+import com.kv.db.KeyValueQuery;
 import org.apache.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
@@ -20,6 +21,9 @@ public class CommandParsing {
         String payload = command.replaceFirst(putPrefix, "");
         String[] keyValue = payload.split(":");
 
+//        System.out.println("PUT key: " + keyValue[0]);
+//        System.out.println("PUT value: " + keyValue[1]);
+
         return new KeyValueQuery(
             KeyValueQuery.QueryType.PUT,
             stringToBytes(keyValue[0]),
@@ -29,6 +33,8 @@ public class CommandParsing {
         String payload = command.replaceFirst(getPrefix, "");
         String key = payload.split(":")[0];
 
+        //System.out.println("GET key: " + key);
+
         return new KeyValueQuery(
             KeyValueQuery.QueryType.GET,
             stringToBytes(key),
@@ -37,6 +43,8 @@ public class CommandParsing {
       } else if (lowerCaseCommand.startsWith(deletePrefix)) {
         String payload = command.replaceFirst(deletePrefix, "");
         String key = payload.split(":")[0];
+
+        System.out.println("DELETE key: " + key);
 
         return new KeyValueQuery(
             KeyValueQuery.QueryType.DELETE,
