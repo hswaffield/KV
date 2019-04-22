@@ -21,7 +21,12 @@ public class LocalKeyValueStore {
   static Logger logger = LoggingHelper.getConfiguredLogger(LocalKeyValueStore.class);
 
   public static void main(String[] args) throws Exception {
-    System.out.println("Welcome to the interactive shell. End with 'exit' or 'kill'");
+    System.out.println("Welcome to the interactive KV shell. Exit by entering 'exit' or 'kill'.\n");
+    System.out.println("Run queries, by entering commands like these:");
+    System.out.println("put:some_key:some_value");
+    System.out.println("get:some_key");
+    System.out.println("delete:some_key\n");
+
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     //need to have some sort of path where the DB lives...
@@ -46,10 +51,12 @@ public class LocalKeyValueStore {
           byte[] response = QueryRunner.RunKeyValueQuery(db, keyValueQuery);
 
           if (keyValueQuery.queryType == KeyValueQuery.QueryType.GET) {
-            System.out.println(response);
+            //System.out.println(response);
             if (response != null) {
-              System.out.println(new String(response, StandardCharsets.UTF_8));
+              System.out.println("-> " + new String(response, StandardCharsets.UTF_8));
             }
+          } else {
+            System.out.println("done");
           }
         }
       }
