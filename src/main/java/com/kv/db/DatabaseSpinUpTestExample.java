@@ -1,5 +1,6 @@
 package com.kv.db;
 
+import com.kv.utils.LoggingHelper;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.rocksdb.Options;
@@ -10,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 
 public class DatabaseSpinUpTestExample {
 
-  static Logger logger = Logger.getLogger(DatabaseSpinUpTestExample.class);
+  private static Logger logger = LoggingHelper.getConfiguredLogger(DatabaseSpinUpTestExample.class);
 
   public static void main(String[] args) throws Exception {
     //TODO: seperate logging configuration into a seperate place, probably:
@@ -42,7 +43,8 @@ public class DatabaseSpinUpTestExample {
         logger.info("printing get for hi_key and hi_key_2");
         System.out.println(new String(db.get(hi_key), StandardCharsets.UTF_8));
 
-        System.out.println(new String(db.get(hi_key_2), StandardCharsets.UTF_8));
+        System.out
+            .println(new String(db.get(hi_key_2), StandardCharsets.UTF_8));
         logger.info(
             "check it out: db.get(hi_key)" + new String(db.get(hi_key), StandardCharsets.UTF_8));
 

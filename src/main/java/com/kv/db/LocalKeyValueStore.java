@@ -1,6 +1,7 @@
 package com.kv.db;
 
 import com.kv.utils.CommandParsing;
+import com.kv.utils.HappyEaster.HappyEaster;
 import com.kv.utils.KeyValueQuery;
 
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ public class LocalKeyValueStore {
   //static Logger logger = Logger.getLogger(LocalKeyValueStore.class);
 
   public static void main(String[] args) throws Exception {
+    System.out.println("Welcome to the interactive shell. End with 'exit' or 'kill'");
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     //need to have some sort of path where the DB lives...
@@ -22,8 +24,8 @@ public class LocalKeyValueStore {
 
     String query;
     while ((query = br.readLine()) != null) {
-      if (query.equals("killed")) {
-        System.out.println("Thanks for playing. Bye-bye. •|龴◡龴|•");
+      if (query.toLowerCase().equals("exit") || query.toLowerCase().equals("kill")) {
+        System.out.println("Thanks for playing. Bye-bye. " + HappyEaster.getEgg());
         break;
       }
 
