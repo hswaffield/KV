@@ -1,3 +1,5 @@
+package com.kv.db;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.rocksdb.Options;
@@ -5,7 +7,6 @@ import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 public class DatabaseSpinUpTestExample {
 
@@ -38,13 +39,17 @@ public class DatabaseSpinUpTestExample {
         db.put(hi_key, hi_value);
         db.put(hi_key_2, hi_value_2);
 
-        System.out.println(Arrays.toString(db.get(hi_key)));
+        logger.info("printing get for hi_key and hi_key_2");
         System.out.println(new String(db.get(hi_key), StandardCharsets.UTF_8));
 
-        System.out.println(Arrays.toString(db.get(hi_key_2)));
         System.out.println(new String(db.get(hi_key_2), StandardCharsets.UTF_8));
         logger.info(
             "check it out: db.get(hi_key)" + new String(db.get(hi_key), StandardCharsets.UTF_8));
+
+        logger.info("about to delete hi_key, from db, then get results for both keys");
+        db.delete(hi_key);
+        System.out.println(db.get(hi_key));
+        System.out.println(new String(db.get(hi_key_2), StandardCharsets.UTF_8));
       }
     } catch (RocksDBException e) {
       // do some error handling
