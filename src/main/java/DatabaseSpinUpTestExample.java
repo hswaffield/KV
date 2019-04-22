@@ -16,7 +16,7 @@ public class DatabaseSpinUpTestExample {
     PropertyConfigurator.configure("log4j.properties");
 
     // edit this path, as needed, this is just one example
-    final String pathToDb = "/Users/hswaff/code/KV/db";
+    final String pathToDb = "/tmp/db";
 
     // a static method that loads the RocksDB C++ library.
     RocksDB.loadLibrary();
