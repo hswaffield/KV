@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class Server {
   public static void main(String[] args) {
     try {
-      org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(8008);
+      org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(8080);
       ServletHandler handler = new ServletHandler();
       server.setHandler(handler);
       handler.addServletWithMapping(KvHandler.class, "/kv");
@@ -23,7 +23,7 @@ public class Server {
     }
   }
 
-  public class KvHandler extends HttpServlet {
+  public static class KvHandler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       JSONObject body = new JSONObject();
